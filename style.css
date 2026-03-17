@@ -5,13 +5,23 @@
 }
 
 body {
-    font-family: 'Arial Black', Arial, sans-serif;
-    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 100vh;
+    overflow: hidden;
+}
+
+/* CLASSE BASE PARA TELAS */
+.screen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: relative;
 }
 
-/* ESTRELAS MOVENDO */
+/* ESTRELAS */
 .stars-container {
     position: absolute;
     top: 0;
@@ -19,64 +29,66 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 1;
 }
 
 .star {
     position: absolute;
-    color: #ffd700;
-    font-size: 12px;
-    animation: twinkle 3s infinite;
+    color: #fff;
+    font-size: 14px;
+    animation: twinkle 4s infinite ease-in-out;
 }
 
 @keyframes twinkle {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
 }
 
-/* Tela do Presente */
+/* TELA PRESENTE */
 .gift-screen {
-    background: radial-gradient(ellipse at center, #0a0a23 0%, #000000 70%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    background: linear-gradient(135deg, #0c0c1e 0%, #1a1a3e 50%, #000 100%);
 }
 
 .gift-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
+    z-index: 3;
+    position: relative;
 }
 
 .gift {
-    width: 180px;
-    height: 180px;
-    background: linear-gradient(145deg, #ff4757, #c44569);
-    position: relative;
-    border-radius: 25px;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(145deg, #ff6b7d, #ff8fa3);
+    border-radius: 30px;
     cursor: pointer;
-    animation: giftFloat 2s ease-in-out infinite;
+    position: relative;
+    animation: giftBounce 2s infinite ease-in-out;
     box-shadow: 
-        0 20px 40px rgba(255, 71, 87, 0.4),
-        inset 0 5px 10px rgba(255,255,255,0.2);
-    border: 4px solid #fff;
+        0 25px 50px rgba(255, 107, 125, 0.5),
+        0 0 50px rgba(255, 107, 125, 0.3),
+        inset 0 10px 20px rgba(255,255,255,0.2);
+    border: 5px solid #fff;
+    transition: all 0.3s ease;
+}
+
+.gift:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 35px 70px rgba(255, 107, 125, 0.7),
+        0 0 70px rgba(255, 107, 125, 0.5);
 }
 
 .gift::before {
     content: '';
     position: absolute;
-    top: -20px;
+    top: -25px;
     left: 50%;
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 30px solid transparent;
-    border-right: 30px solid transparent;
-    border-bottom: 30px solid #f39c12;
-    border-radius: 50% 50% 0 0;
-    box-shadow: 0 5px 10px rgba(243, 156, 18, 0.4);
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 35px solid #ffa726;
+    filter: drop-shadow(0 5px 10px rgba(255, 167, 38, 0.5));
 }
 
 .gift-heart {
@@ -84,102 +96,100 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 50px;
-    animation: heartPulse 1.5s infinite;
+    font-size: 60px;
+    animation: heartBeat 1.2s infinite;
 }
 
-@keyframes heartPulse {
+@keyframes heartBeat {
     0% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.3); }
-    100% { transform: translate(-50%, -50%) scale(1); }
+    14% { transform: translate(-50%, -50%) scale(1.3); }
+    28% { transform: translate(-50%, -50%) scale(1); }
+    42% { transform: translate(-50%, -50%) scale(1.3); }
+    70% { transform: translate(-50%, -50%) scale(1); }
 }
 
-@keyframes giftFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(2deg); }
+@keyframes giftBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
 }
 
 .gift-text {
     color: #ffd700;
-    font-size: 1.8rem;
-    text-shadow: 0 0 20px #ffd700;
-    animation: glow 2s infinite alternate;
-    margin-top: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700;
+    animation: textGlow 2s infinite alternate;
+    z-index: 3;
+    margin-top: 30px;
 }
 
-@keyframes glow {
-    from { text-shadow: 0 0 20px #ffd700; }
-    to { text-shadow: 0 0 30px #ffd700, 0 0 40px #ffd700; }
+@keyframes textGlow {
+    0% { text-shadow: 0 0 20px #ffd700; }
+    100% { text-shadow: 0 0 30px #ffd700, 0 0 50px #ffd700; }
 }
 
-/* Tela do Eu Te Amo */
+/* TELA AMOR */
 .love-screen {
-    background: radial-gradient(ellipse at center, #1a0033 0%, #000000 70%);
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #000 100%);
 }
 
 .love-text {
-    font-size: 5rem;
-    background: linear-gradient(45deg, #ff1744, #ff6b9d, #ff8e8e);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 0 40px #ff1744;
-    animation: lovePulse 2s infinite;
-    margin-bottom: 40px;
+    font-size: 6rem;
     font-weight: 900;
-    letter-spacing: 5px;
+    background: linear-gradient(45deg, #ff1744, #ff6b9d, #ff8e8e, #ff4757);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: loveShine 3s ease-in-out infinite, textPulse 2s infinite;
+    text-shadow: 0 0 60px rgba(255, 23, 68, 0.8);
+    margin-bottom: 50px;
+    letter-spacing: 8px;
 }
 
-@keyframes lovePulse {
-    0% { 
-        transform: scale(1) rotate(-2deg);
-        filter: hue-rotate(0deg);
-    }
-    50% { 
-        transform: scale(1.05) rotate(2deg);
-        filter: hue-rotate(10deg);
-    }
-    100% { 
-        transform: scale(1) rotate(-2deg);
-        filter: hue-rotate(0deg);
-    }
+@keyframes loveShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes textPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 .question {
-    color: #ffd700;
-    font-size: 3rem;
-    text-shadow: 0 0 20px #ffd700;
-    margin-bottom: 50px;
-    animation: fadeInUp 2s ease-out;
+    color: #e6e6fa;
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-shadow: 0 0 30px #9370db;
+    margin-bottom: 60px;
+    animation: fadeIn 2s ease-out;
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .buttons {
     display: flex;
-    gap: 40px;
+    gap: 50px;
+    z-index: 5;
 }
 
 .btn {
-    padding: 20px 50px;
-    font-size: 1.8rem;
+    padding: 25px 60px;
+    font-size: 2rem;
     font-weight: bold;
     border: none;
-    border-radius: 50px;
+    border-radius: 60px;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     position: relative;
     overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .btn::before {
@@ -190,7 +200,7 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transition: left 0.5s;
+    transition: 0.6s;
 }
 
 .btn:hover::before {
@@ -200,176 +210,174 @@ body {
 .btn-yes {
     background: linear-gradient(45deg, #00b894, #00cec9);
     color: white;
-    box-shadow: 0 15px 35px rgba(0, 184, 148, 0.6);
+    box-shadow: 0 20px 40px rgba(0, 184, 148, 0.4);
 }
 
 .btn-no {
-    background: linear-gradient(45deg, #57606f, #2f3542);
+    background: linear-gradient(45deg, #636e72, #2d3436);
     color: white;
-    box-shadow: 0 15px 35px rgba(87, 96, 111, 0.6);
+    box-shadow: 0 20px 40px rgba(99, 110, 114, 0.4);
 }
 
 .btn:hover {
-    transform: translateY(-10px) scale(1.05);
+    transform: translateY(-15px) scale(1.05);
 }
 
-/* Corações de fundo */
+/* CORAÇÕES FLUTUANTES */
 .heart {
     position: absolute;
-    font-size: 25px;
-    animation: floatHearts 8s infinite linear;
-    filter: drop-shadow(0 0 10px currentColor);
+    font-size: 28px;
+    pointer-events: none;
+    z-index: 2;
+    animation: floatUp 6s linear infinite;
 }
 
-@keyframes floatHearts {
-    0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
     10% { opacity: 1; transform: scale(1); }
     90% { opacity: 1; }
-    100% { transform: translateY(-100px) rotate(360deg) scale(1.5); opacity: 0; }
+    100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+    }
 }
 
-/* Tela SIM - Felicidade */
+/* TELA FELIZ */
 .happy-screen {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(-45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    animation: happyBg 10s ease infinite;
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
+@keyframes happyBg {
+    0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 .happy-title {
-    font-size: 4rem;
-    color: white;
-    text-shadow: 0 0 30px rgba(255,255,255,0.8);
-    animation: bounceHappy 1.5s infinite;
-    margin-bottom: 40px;
+    font-size: 4.5rem;
+    color: #ff4757;
     font-weight: 900;
+    text-shadow: 0 0 40px rgba(255, 71, 87, 0.8);
+    animation: happyBounce 1.5s infinite;
+    margin-bottom: 50px;
 }
 
-@keyframes bounceHappy {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-20px) scale(1.1); }
+@keyframes happyBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-25px); }
 }
 
 .doll-happy-container {
     display: flex;
-    gap: 50px;
-    margin: 20px 0;
+    gap: 60px;
+    margin: 30px 0;
 }
 
 .doll-happy {
-    font-size: 80px;
-    animation: danceHappy 2s infinite;
+    font-size: 90px;
+    display: block;
+    animation: happyDance 2s infinite ease-in-out;
 }
 
-.doll1 { animation-delay: 0s; }
-.doll2 { animation-delay: 0.5s; }
+.doll-boy { animation-delay: 0s; }
+.doll-girl { animation-delay: 0.5s; }
 
-@keyframes danceHappy {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    25% { transform: rotate(15deg) scale(1.1); }
-    75% { transform: rotate(-15deg) scale(1.1); }
+@keyframes happyDance {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(10deg) translateY(-20px); }
+    75% { transform: rotate(-10deg) translateY(-20px); }
 }
 
 .happy-message {
-    font-size: 2.2rem;
-    color: white;
-    text-shadow: 0 0 20px rgba(255,255,255,0.8);
-    animation: fadeInUp 2s ease-out 0.5s both;
+    font-size: 2.5rem;
+    color: #e74c3c;
+    font-weight: bold;
+    text-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+    animation: fadeIn 2s ease-out 0.5s both;
 }
 
-/* Tela NÃO - Tristeza */
+/* TELA TRISTE */
 .sad-screen {
-    background: linear-gradient(45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a252f 100%);
 }
 
 .sad-title {
-    font-size: 4rem;
-    background: linear-gradient(45deg, #74b9ff, #0984e3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 0 30px rgba(116, 185, 255, 0.8);
-    animation: shakeSad 1s infinite;
-    margin-bottom: 40px;
+    font-size: 4.5rem;
+    color: #74b9ff;
+    font-weight: 900;
+    text-shadow: 0 0 40px rgba(116, 185, 255, 0.8);
+    animation: sadShake 1s infinite;
+    margin-bottom: 50px;
 }
 
-@keyframes shakeSad {
+@keyframes sadShake {
     0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
 }
 
 .doll-sad-container {
     display: flex;
-    gap: 40px;
-    margin: 20px 0;
+    gap: 50px;
+    margin: 30px 0;
 }
 
 .doll-sad {
-    font-size: 70px;
-    animation: crySad 1.5s infinite;
+    font-size: 80px;
+    display: block;
+    animation: sadCry 1.8s infinite ease-in-out;
 }
 
 .doll1 { animation-delay: 0s; }
-.doll2 { animation-delay: 0.3s; }
-.doll3 { animation-delay: 0.6s; }
+.doll2 { animation-delay: 0.4s; }
+.doll3 { animation-delay: 0.8s; }
 
-@keyframes crySad {
+@keyframes sadCry {
     0%, 100% { transform: scale(1) translateY(0); }
-    50% { transform: scale(0.95) translateY(5px); }
+    50% { transform: scale(0.95) translateY(8px); }
 }
 
 .sad-message {
-    font-size: 2.2rem;
-    color: #b2bec3;
-    text-shadow: 0 0 10px rgba(178, 190, 195, 0.5);
+    font-size: 2.5rem;
+    color: #bdc3c7;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(189, 195, 199, 0.6);
 }
 
-/* Flores */
+/* FLORES */
 .flower {
     position: absolute;
-    font-size: 45px;
-    animation: flowerDance 3s infinite;
-    filter: drop-shadow(0 0 15px rgba(255,255,255,0.8));
+    font-size: 50px;
+    pointer-events: none;
+    z-index: 2;
+    animation: flowerFloat 4s infinite ease-in-out;
 }
 
-@keyframes flowerDance {
-    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-    33% { transform: translateY(-20px) rotate(20deg) scale(1.2); }
-    66% { transform: translateY(-10px) rotate(-15deg) scale(1.1); }
+@keyframes flowerFloat {
+    0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+    20% { opacity: 1; transform: scale(1); }
+    80% { opacity: 1; }
+    100% { transform: translateY(-150px) rotate(720deg) scale(1.2); opacity: 0; }
 }
 
-/* Chuva */
+/* CHUVA */
 .raindrop {
     position: absolute;
     color: #74b9ff;
-    font-size: 18px;
-    animation: rainFall 3s linear infinite;
-    filter: drop-shadow(0 0 5px #74b9ff);
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 2;
+    animation: rainDrop 2.5s linear infinite;
 }
 
-@keyframes rainFall {
-    0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+@keyframes rainDrop {
+    0% { transform: translateY(-100px); opacity: 0; }
     10% { opacity: 1; }
     90% { opacity: 1; }
-    100% { transform: translateY(120vh) rotate(10deg); opacity: 0; }
+    100% { transform: translateY(110vh); opacity: 0; }
 }
 
 .hidden {
