@@ -6,7 +6,10 @@ const sadScreen = document.getElementById('sadScreen');
 const giftBox = document.getElementById('giftBox');
 const btnYes = document.getElementById('btnYes');
 const btnNo = document.getElementById('btnNo');
-const loveText = document.getElementById('loveText');
+const starsContainer = document.getElementById('starsContainer');
+
+// Inicializa estrelas
+createStars();
 
 // Clica no presente
 giftBox.addEventListener('click', () => {
@@ -35,61 +38,37 @@ btnNo.addEventListener('click', () => {
     createRain();
 });
 
+// Criar estrelas piscando
+function createStars() {
+    for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.innerHTML = ['⭐', '✨', '⭐', '✨'][Math.floor(Math.random() * 4)];
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        starsContainer.appendChild(star);
+    }
+}
+
 // Função para criar corações flutuantes
 function createFloatingHearts() {
-    const hearts = ['💖', '💕', '💗', '💝', '❤️'];
-    for (let i = 0; i < 20; i++) {
+    const hearts = ['💖', '💕', '💗', '💝', '❤️', '💓'];
+    for (let i = 0; i < 25; i++) {
         setTimeout(() => {
             const heart = document.createElement('div');
             heart.className = 'heart';
             heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
             heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 1 + 's';
             loveScreen.appendChild(heart);
 
-            setTimeout(() => {
-                heart.remove();
-            }, 8000);
-        }, i * 200);
-    }
-}
-
-// Função para criar flores dançando
-function createDancingFlowers() {
-    const flowers = ['🌸', '🌺', '🌹', '🌻', '🌼', '🌷'];
-    for (let i = 0; i < 15; i++) {
-        setTimeout(() => {
-            const flower = document.createElement('div');
-            flower.className = 'flower';
-            flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
-            flower.style.left = Math.random() * 100 + '%';
-            flower.style.top = Math.random() * 100 + '%';
-            flower.style.animationDelay = Math.random() * 2 + 's';
-            happyScreen.appendChild(flower);
-
-            setTimeout(() => {
-                flower.remove();
-            }, 5000);
+            setTimeout(() => heart.remove(), 9000);
         }, i * 150);
     }
 }
 
-// Função para criar chuva
-function createRain() {
-    for (let i = 0; i < 50; i++) {
-        setTimeout(() => {
-            const drop = document.createElement('div');
-            drop.className = 'raindrop';
-            drop.innerHTML = '💧';
-            drop.style.left = Math.random() * 100 + '%';
-            drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
-            drop.style.animationDelay = Math.random() * 2 + 's';
-            sadScreen.appendChild(drop);
-
-            setTimeout(() => {
-                drop.remove();
-            }, 3000);
-        }, i * 50);
-    }
-}
+// Função para criar flores dançando
+function
