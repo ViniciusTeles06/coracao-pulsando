@@ -9,10 +9,9 @@ body {
     height: 100vh;
     overflow: hidden;
     font-family: 'Comic Sans MS', cursive;
-    position: relative;
 }
 
-/* ESTRELAS */
+/* ESTRELAS (igual) */
 .stars, .stars2 {
     position: fixed;
     top: 0;
@@ -22,8 +21,7 @@ body {
     background-image: 
         radial-gradient(2px 2px at 20px 30px, #fff, transparent),
         radial-gradient(2px 2px at 80px 80px, #ffd700, transparent),
-        radial-gradient(1.5px 1.5px at 150px 50px, #ff69b4, transparent),
-        radial-gradient(2px 2px at 250px 120px, #fff, transparent);
+        radial-gradient(1.5px 1.5px at 150px 50px, #ff69b4, transparent);
     pointer-events: none;
     z-index: 1;
     animation: starsTwinkle 4s ease-in-out infinite;
@@ -32,8 +30,8 @@ body {
 .stars2 { animation-delay: -2s; }
 
 @keyframes starsTwinkle {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.3); }
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 
 /* TELAS */
@@ -49,7 +47,7 @@ body {
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    transition: all 1s ease-in-out;
+    transition: all 0.8s ease-in-out;
     z-index: 10;
 }
 
@@ -58,27 +56,26 @@ body {
     visibility: visible;
 }
 
-/* CAIXINHA DE PRESENTE */
+/* 🎁 CAIXINHA DE PRESENTE COM CORAÇÃO DENTRO */
 .gift-container {
     animation: giftFloat 3s ease-in-out infinite;
 }
 
 .gift-box {
     cursor: pointer;
-    transform-origin: center;
-    transition: all 0.5s;
+    position: relative;
+    transition: all 0.6s;
 }
 
-.gift-box:hover {
-    transform: scale(1.05);
-}
+.gift-box:hover { transform: scale(1.08); }
 
 .gift-top {
-    width: 160px;
-    height: 20px;
+    width: 200px;
+    height: 25px;
     background: linear-gradient(90deg, #ff6b9d, #c44569);
     position: relative;
-    border-radius: 10px 10px 0 0;
+    border-radius: 12px 12px 0 0;
+    z-index: 3;
 }
 
 .gift-top::before {
@@ -87,135 +84,184 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background: #ffd700;
     border-radius: 50%;
-    box-shadow: 0 0 15px #ffd700;
+    box-shadow: 0 0 20px #ffd700;
 }
 
 .gift-body {
-    width: 160px;
-    height: 140px;
-    background: linear-gradient(180deg, #ff9a9e, #fecfef);
-    border-radius: 0 0 20px 20px;
+    width: 200px;
+    height: 170px;
+    background: linear-gradient(180deg, #ff9a9e 0%, #fecfef 50%, #f8b500 100%);
+    border-radius: 0 0 25px 25px;
     position: relative;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    overflow: hidden;
 }
 
 .ribbon {
     position: absolute;
-    top: -10px;
+    top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 40px;
+    width: 70px;
+    height: 45px;
     background: linear-gradient(45deg, #ffd700, #ffed4a);
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(255,215,0,0.5);
+    border-radius: 35px;
+    box-shadow: 0 8px 20px rgba(255,215,0,0.6);
+    z-index: 4;
 }
 
 .gift-text {
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     color: #c44569;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    text-shadow: 1px 1px 2px #fff;
+    text-shadow: 2px 2px 3px #fff;
+    z-index: 5;
 }
 
-/* CORAÇÃO (TELA 2) */
-.heart-wrapper {
-    margin-bottom: 40px;
+/* CORAÇÃO DENTRO DA CAIXINHA (inicialmente escondido) */
+.heart-inside {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 100px;
+    height: 90px;
+    opacity: 0;
+    z-index: 2;
+    transition: all 0.8s ease-out;
 }
 
+.heart-inside.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.heart-inside .heart-top {
+    width: 50px;
+    height: 50px;
+    background: #ff1744;
+    border-radius: 50px 50px 0 0;
+    position: absolute;
+    top: 0;
+    left: 25px;
+    transform: rotate(-45deg);
+}
+
+.heart-inside .heart-top::after {
+    content: '';
+    width: 50px;
+    height: 50px;
+    background: #ff69b4;
+    border-radius: 50px 50px 0 0;
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    transform: rotate(45deg);
+}
+
+.heart-inside .heart-bottom {
+    width: 70px;
+    height: 55px;
+    background: #ff1744;
+    border-radius: 70px 70px 30px 30px;
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+}
+
+/* CORAÇÃO PRINCIPAL (tela 2 - igual anterior mas maior) */
 .heart {
     position: relative;
-    width: 220px;
-    height: 190px;
+    width: 240px;
+    height: 210px;
     animation: heartbeat 2s ease-in-out infinite 1s;
 }
 
 .heart-top {
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 120px;
     background: #ff69b4;
-    border-radius: 110px 110px 0 0;
+    border-radius: 120px 120px 0 0;
     position: absolute;
     top: 0;
-    left: 55px;
+    left: 60px;
     transform: rotate(-45deg);
-    box-shadow: 0 15px 35px rgba(255,105,180,0.7);
+    box-shadow: 0 20px 45px rgba(255,105,180,0.8);
 }
 
 .heart-top::after {
     content: '';
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 120px;
     background: #ff1493;
-    border-radius: 110px 110px 0 0;
+    border-radius: 120px 120px 0 0;
     position: absolute;
-    top: 20px;
-    left: -20px;
+    top: 25px;
+    left: -25px;
     transform: rotate(45deg);
 }
 
 .heart-bottom {
-    width: 155px;
-    height: 125px;
+    width: 170px;
+    height: 140px;
     background: #ff69b4;
-    border-radius: 155px 155px 80px 80px;
+    border-radius: 170px 170px 85px 85px;
     position: absolute;
     bottom: 0;
-    left: 33px;
-    box-shadow: 0 20px 40px rgba(255,105,180,0.8);
+    left: 35px;
+    box-shadow: 0 25px 50px rgba(255,105,180,0.9);
 }
 
 .love-text-inside {
     position: absolute;
-    top: 52%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    text-shadow: 2px 2px 5px #ff1493;
-    letter-spacing: 1px;
+    text-shadow: 3px 3px 6px #ff1493;
+    letter-spacing: 1.5px;
 }
 
-/* PERGUNTA BRANCA */
+/* PERGUNTA BRANCA VISÍVEL */
 .question h2 {
-    color: #fff !important;
-    font-size: 2.5rem;
+    color: #ffffff !important;
+    font-size: 2.8rem;
     text-align: center;
-    text-shadow: 0 0 25px #ff69b4, 2px 2px 5px #000;
+    text-shadow: 
+        0 0 30px #ff69b4, 
+        0 0 40px #ff1493,
+        3px 3px 8px rgba(0,0,0,0.8);
     animation: questionPulse 2s ease-in-out infinite 1.5s;
-    margin: 20px 0;
 }
 
-/* BOTÕES */
-.buttons {
-    display: flex;
-    gap: 50px;
-}
+/* BOTÕES (igual anterior) */
+.buttons { display: flex; gap: 60px; margin-top: 30px; }
 
 .btn {
-    padding: 18px 35px;
-    font-size: 1.6rem;
+    padding: 20px 40px;
+    font-size: 1.8rem;
     border: none;
-    border-radius: 35px;
+    border-radius: 40px;
     cursor: pointer;
     font-weight: bold;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    transition: all 0.3s;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    transition: all 0.4s;
 }
 
 .btn-yes {
     background: linear-gradient(45deg, #ff69b4, #ff1493);
     color: white;
-    animation: wiggle 0.8s ease-in-out infinite;
+    animation: wiggle 0.7s ease-in-out infinite;
 }
 
 .btn-no {
@@ -223,167 +269,189 @@ body {
     color: white;
 }
 
-.btn:hover { transform: scale(1.15) !important; }
-
-/* GATINHOS (igual anterior, mas otimizado) */
+/* GATINHOS DETALHADOS E REALISTAS 🐱 */
 .cat-container {
     text-align: center;
-    max-width: 400px;
+    max-width: 450px;
 }
 
 .cat-head {
     position: relative;
-    width: 140px;
-    height: 110px;
-    margin: 0 auto 25px;
+    width: 160px;
+    height: 130px;
+    margin: 0 auto 30px;
 }
 
+/* ORELHAS DETALHADAS */
 .cat-ears {
     position: absolute;
-    top: -25px;
-    left: 25px;
-    width: 90px;
+    top: -15px;
+    left: 30px;
+    width: 100px;
 }
 
 .ear {
-    width: 0;
-    height: 0;
-    border-left: 28px solid transparent;
-    border-right: 28px solid transparent;
-    border-bottom: 40px solid #ffdbac;
     position: absolute;
+    width: 35px;
+    height: 45px;
+    background: linear-gradient(145deg, #ffdbac, #f4b084);
+    border-radius: 20px 25px 15px 25px;
+    box-shadow: 
+        inset -5px -5px 10px rgba(255,219,172,0.5),
+        0 5px 15px rgba(0,0,0,0.3);
 }
 
-.ear.left { left: 0; }
-.ear.right { right: 0; transform: scaleX(-1); }
+.ear.left {
+    left: 0;
+    transform: rotate(-10deg);
+}
 
+.ear.right {
+    right: 0;
+    transform: rotate(10deg) scaleX(-1);
+}
+
+.ear::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    background: linear-gradient(145deg, #e6a77a, #d99b6a);
+    border-radius: 15px 20px 10px 20px;
+}
+
+/* ROSTO REALISTA */
 .cat-face {
-    width: 110px;
-    height: 90px;
-    background: #ffdbac;
-    border-radius: 55%;
-    margin: 0 auto;
+    width: 120px;
+    height: 100px;
+    background: linear-gradient(180deg, #ffdbac 0%, #f4b084 70%, #e6a77a 100%);
+    border-radius: 60px;
+    margin: 15px auto 0;
     position: relative;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    box-shadow: 
+        inset 0 5px 15px rgba(255,255,255,0.4),
+        0 10px 30px rgba(0,0,0,0.4);
 }
 
+/* OLHOS DETALHADOS */
 .happy-eyes {
     position: absolute;
-    top: 30px;
+    top: 25px;
     left: 20px;
     right: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .eye {
-    width: 22px;
-    height: 22px;
-    background: #333;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(145deg, #4a4a4a, #2d2d2d);
     border-radius: 50%;
-    position: absolute;
-    top: 0;
+    position: relative;
+    box-shadow: inset 3px 3px 8px rgba(255,255,255,0.3);
 }
 
-.eye.left { left: 0; }
-.eye.right { right: 0; }
+.eye::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background: radial-gradient(circle at 30% 30%, #fff 0%, transparent 50%);
+    border-radius: 50%;
+}
 
+/* BOCA FELIZ */
 .smile {
     position: absolute;
-    bottom: 25px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 45px;
-    height: 28px;
-    background: #333;
-    border-radius: 0 0 45px 45px;
-    border: 5px solid #ffdbac;
+    width: 50px;
+    height: 30px;
+    border: 4px solid #333;
+    border-top: none;
+    border-radius: 0 0 50px 50px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.3) 100%);
 }
 
-.sad-ears .ear { border-bottom-color: #ddd; }
+/* TRISTE */
+.sad-ears .ear {
+    background: linear-gradient(145deg, #ddd, #bbb);
+}
 
 .sad-eyes .eye {
-    width: 18px;
-    height: 32px;
-    border-radius: 18px 18px 8px 8px;
-    background: linear-gradient(to bottom, #333, #666);
+    width: 22px;
+    height: 35px;
+    border-radius: 22px 22px 10px 10px;
+    background: linear-gradient(to bottom, #555, #333);
+}
+
+.sad-eyes .eye::after {
+    background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.2) 0%, transparent 50%);
 }
 
 .sad-mouth {
     position: absolute;
-    bottom: 30px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
-    width: 35px;
-    height: 22px;
-    border: 5px solid #333;
+    width: 40px;
+    height: 25px;
+    border: 4px solid #444;
     border-top: none;
-    border-radius: 0 0 35px 35px;
+    border-radius: 0 0 40px 40px;
+    background: linear-gradient(to bottom, rgba(100,100,100,0.3) 0%, transparent 100%);
 }
 
 .tears {
     position: absolute;
-    top: 55px;
-    left: 25px;
-    right: 25px;
+    top: 60px;
+    left: 30px;
+    right: 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .tear {
-    width: 15px;
-    height: 15px;
-    background: #4a9eff;
-    border-radius: 50% 50% 50% 0;
-    position: absolute;
-    animation: cry 2s ease-in-out infinite;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(145deg, #4a9eff, #6bb6ff);
+    border-radius: 50% 50% 60% 40%;
+    box-shadow: 0 4px 12px rgba(74,158,255,0.4);
+    animation: cry 2.5s ease-in-out infinite;
 }
 
-.tear.left { left: 10px; }
-.tear.right { right: 10px; animation-delay: 0.6s; }
-
-.flowers { font-size: 3rem; margin: 20px 0; }
+.flowers { font-size: 3.5rem; margin: 25px 0; }
 
 .btn-restart {
     background: linear-gradient(45deg, #ff69b4, #ff1493);
     color: white;
-    padding: 15px 30px;
-    font-size: 1.4rem;
-    margin-top: 20px;
+    padding: 18px 35px;
+    font-size: 1.5rem;
+    margin-top: 25px;
+    border-radius: 30px;
 }
 
 /* ANIMAÇÕES */
-@keyframes giftFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-@keyframes heartAppear {
-    0% { transform: scale(0.5) rotate(-180deg); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-}
-
-@keyframes questionPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-@keyframes wiggle {
-    0%, 100% { transform: rotate(0); }
-    25% { transform: rotate(4deg); }
-    75% { transform: rotate(-4deg); }
-}
-
-@keyframes cry {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(40px); opacity: 0; }
-}
+@keyframes giftFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+@keyframes giftOpen { 0% { transform: rotateY(0deg) scale(1); } 100% { transform: rotateY(180deg) scale(0.8); opacity: 0; } }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+@keyframes questionPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+@keyframes wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(3deg); } 75% { transform: rotate(-3deg); } }
+@keyframes cry { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(50px) scale(0.8); opacity: 0; } }
+@keyframes sparkleFade { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(2) rotate(360deg); } }
+@keyframes heartsFall { to { top: 110vh; transform: rotate(720deg); } }
+@keyframes tearsFall { to { top: 110vh; transform: rotate(-360deg); } }
 
 @media (max-width: 768px) {
-    .gift-body { width: 140px; height: 120px; }
-    .heart { width: 180px; height: 155px; }
-    .question h2 { font-size: 2rem; }
+    .gift-body { width: 170px; height: 145px; }
+    .heart { width: 200px; height: 175px; }
+    .question h2 { font-size: 2.2rem; }
     .buttons { gap: 30px; }
-    .btn { font-size: 1.4rem; padding: 15px 25px; }
+    .btn { font-size: 1.5rem; padding: 15px 25px; }
 }
