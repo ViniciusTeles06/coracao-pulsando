@@ -1,37 +1,52 @@
-// Corações flutuantes ao clicar
+// Corações flutuantes fofos ao tocar/clicar
 document.addEventListener('click', function(e) {
-    const heart = document.createElement('div');
-    heart.textContent = '💖';
-    heart.style.cssText = `
-        position: fixed;
-        left: ${e.clientX}px;
-        top: ${e.clientY}px;
-        font-size: 30px;
-        pointer-events: none;
-        z-index: 9999;
-        animation: float 2s ease-out forwards;
-        color: #ff1744;
-        text-shadow: 0 0 10px #ff1744;
-    `;
-    document.body.appendChild(heart);
-    
-    setTimeout(() => heart.remove(), 2000);
+    for(let i = 0; i < 3; i++) {
+        setTimeout(() => createFloatingHeart(e.clientX, e.clientY), i * 100);
+    }
 });
 
-// Animação CSS do float
+function createFloatingHeart(x, y) {
+    const hearts = ['💕', '💖', '💗', '💘', '💝'];
+    const heart = document.createElement('div');
+    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.cssText = `
+        position: fixed;
+        left: ${x}px;
+        top: ${y}px;
+        font-size: ${20 + Math.random() * 20}px;
+        pointer-events: none;
+        z-index: 1000;
+        animation: floatUp 3s ease-out forwards;
+        color: #ff69b4;
+        text-shadow: 0 0 10px #ff69b4;
+    `;
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
+}
+
+// Animação dos corações flutuantes
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes float {
-        0% { transform: translateY(0) scale(1); opacity: 1; }
-        100% { transform: translateY(-120px) scale(0.3); opacity: 0; }
+    @keyframes floatUp {
+        0% { 
+            transform: translateY(0) scale(1) rotate(0deg); 
+            opacity: 1; 
+        }
+        100% { 
+            transform: translateY(-150px) scale(0.5) rotate(360deg); 
+            opacity: 0; 
+        }
     }
 `;
 document.head.appendChild(style);
 
-// Efeito hover no coração
-document.querySelector('.heart').addEventListener('mouseenter', function() {
-    this.style.animationDuration = '0.6s';
-});
-document.querySelector('.heart').addEventListener('mouseleave', function() {
-    this.style.animationDuration = '1.5s';
-});
+// Auto-click romântico (opcional)
+setInterval(() => {
+    if(Math.random() < 0.02) { // 2% chance a cada segundo
+        const rect = document.body.getBoundingClientRect();
+        createFloatingHeart(
+            Math.random() * rect.width, 
+            Math.random() * rect.height
+        );
+    }
+}, 1000);
