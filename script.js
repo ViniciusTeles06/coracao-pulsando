@@ -1,49 +1,37 @@
-// Efeito adicional: corações flutuantes ao clicar
+// Corações flutuantes ao clicar
 document.addEventListener('click', function(e) {
-    createFloatingHeart(e.clientX, e.clientY);
-});
-
-// Função para criar corações flutuantes
-function createFloatingHeart(x, y) {
     const heart = document.createElement('div');
-    heart.innerHTML = '💖';
-    heart.style.position = 'fixed';
-    heart.style.left = x + 'px';
-    heart.style.top = y + 'px';
-    heart.style.fontSize = '30px';
-    heart.style.pointerEvents = 'none';
-    heart.style.zIndex = '1000';
-    heart.style.animation = 'float 2s ease-out forwards';
-    
+    heart.textContent = '💖';
+    heart.style.cssText = `
+        position: fixed;
+        left: ${e.clientX}px;
+        top: ${e.clientY}px;
+        font-size: 30px;
+        pointer-events: none;
+        z-index: 9999;
+        animation: float 2s ease-out forwards;
+        color: #ff1744;
+        text-shadow: 0 0 10px #ff1744;
+    `;
     document.body.appendChild(heart);
     
-    // Remove após animação
-    setTimeout(() => {
-        heart.remove();
-    }, 2000);
-}
+    setTimeout(() => heart.remove(), 2000);
+});
 
-// Adiciona estilo da animação flutuante dinamicamente
+// Animação CSS do float
 const style = document.createElement('style');
 style.textContent = `
     @keyframes float {
-        0% {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(-100px) scale(0.5);
-            opacity: 0;
-        }
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-120px) scale(0.3); opacity: 0; }
     }
 `;
 document.head.appendChild(style);
 
-// Coração pulsa mais forte no hover
-const heart = document.querySelector('.heart');
-heart.addEventListener('mouseenter', function() {
-    this.style.animationDuration = '0.8s';
+// Efeito hover no coração
+document.querySelector('.heart').addEventListener('mouseenter', function() {
+    this.style.animationDuration = '0.6s';
 });
-heart.addEventListener('mouseleave', function() {
+document.querySelector('.heart').addEventListener('mouseleave', function() {
     this.style.animationDuration = '1.5s';
 });
