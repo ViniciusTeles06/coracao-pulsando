@@ -1,62 +1,95 @@
-function openGift() {
-    const giftBox = document.querySelector('.gift-box');
-    const heartInside = document.querySelector('.heart-inside');
+// Elementos
+const giftScreen = document.getElementById('giftScreen');
+const loveScreen = document.getElementById('loveScreen');
+const happyScreen = document.getElementById('happyScreen');
+const sadScreen = document.getElementById('sadScreen');
+const giftBox = document.getElementById('giftBox');
+const btnYes = document.getElementById('btnYes');
+const btnNo = document.getElementById('btnNo');
+const loveText = document.getElementById('loveText');
+
+// Clica no presente
+giftBox.addEventListener('click', () => {
+    giftScreen.classList.add('hidden');
+    loveScreen.style.display = 'flex';
     
-    // Caixinha abre
-    giftBox.style.animation = 'giftOpen 0.8s ease-out forwards';
+    // Cria corações flutuantes
+    createFloatingHearts();
+});
+
+// Botão SIM
+btnYes.addEventListener('click', () => {
+    loveScreen.style.display = 'none';
+    happyScreen.style.display = 'flex';
     
-    // Coração aparece DENTRO da caixinha
-    setTimeout(() => {
-        heartInside.classList.add('active');
-    }, 400);
+    // Cria flores dançando
+    createDancingFlowers();
+});
+
+// Botão NÃO
+btnNo.addEventListener('click', () => {
+    loveScreen.style.display = 'none';
+    sadScreen.style.display = 'flex';
     
-    // Transição para tela principal
-    setTimeout(() => {
-        showScreen('heartScreen');
-        createSparkles(20);
-    }, 1500);
-}
+    // Cria chuva
+    createRain();
+});
 
-function goToHappyCat() {
-    showScreen('happyCat');
-    createHeartsRain(30);
-}
-
-function goToSadCat() {
-    showScreen('sadCat');
-    createTearsRain(20);
-}
-
-function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    setTimeout(() => {
-        document.getElementById(screenId).classList.add('active');
-    }, 400);
-}
-
-function restartGame() {
-    showScreen('giftScreen');
-    document.querySelector('.gift-box').style.animation = '';
-    document.querySelector('.heart-inside').classList.remove('active');
-}
-
-function createSparkles(count) {
-    for(let i = 0; i < count; i++) {
+// Função para criar corações flutuantes
+function createFloatingHearts() {
+    const hearts = ['💖', '💕', '💗', '💝', '❤️'];
+    for (let i = 0; i < 20; i++) {
         setTimeout(() => {
-            const sparkle = document.createElement('span');
-            sparkle.innerHTML = ['✨','⭐','💫'][Math.floor(Math.random()*3)];
-            sparkle.style.cssText = `
-                position: fixed; left: ${Math.random()*100}vw; top: ${Math.random()*60}vh;
-                font-size: ${25+Math.random()*20}px; z-index: 1001;
-                animation: sparkleFade 2.5s ease-out forwards;
-                color: #ffd700; text-shadow: 0 0 15px #ffd700;
-            `;
-            document.body.appendChild(sparkle);
-            setTimeout(()=>sparkle.remove(), 2500);
-        }, i * 60);
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            loveScreen.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }, i * 200);
     }
 }
 
-function createHeartsRain(count
+// Função para criar flores dançando
+function createDancingFlowers() {
+    const flowers = ['🌸', '🌺', '🌹', '🌻', '🌼', '🌷'];
+    for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + '%';
+            flower.style.top = Math.random() * 100 + '%';
+            flower.style.animationDelay = Math.random() * 2 + 's';
+            happyScreen.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 5000);
+        }, i * 150);
+    }
+}
+
+// Função para criar chuva
+function createRain() {
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            const drop = document.createElement('div');
+            drop.className = 'raindrop';
+            drop.innerHTML = '💧';
+            drop.style.left = Math.random() * 100 + '%';
+            drop.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+            drop.style.animationDelay = Math.random() * 2 + 's';
+            sadScreen.appendChild(drop);
+
+            setTimeout(() => {
+                drop.remove();
+            }, 3000);
+        }, i * 50);
+    }
+}
