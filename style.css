@@ -7,85 +7,156 @@
 body {
     background: #000;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Arial Black', Arial, sans-serif;
     overflow: hidden;
+    font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', cursive;
+}
+
+/* ESTRELAS ANIMADAS */
+.stars, .stars2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.stars {
+    background: 
+        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+        radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1px 1px at 130px 80px, #ddd, transparent),
+        radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+    animation: twinkling 3s ease-in-out infinite;
+}
+
+.stars2 {
+    background: 
+        radial-gradient(2px 2px at 200px 120px, #eee, transparent),
+        radial-gradient(1px 1px at 250px 160px, #fff, transparent),
+        radial-gradient(2px 2px at 300px 90px, #fff, transparent),
+        radial-gradient(1px 1px at 350px 140px, #ddd, transparent),
+        radial-gradient(2px 2px at 380px 110px, #fff, transparent);
+    animation: twinkling 4s ease-in-out infinite reverse;
+}
+
+@keyframes twinkling {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
 }
 
 .container {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
 }
 
+/* CORAÇÃO CARTOON */
 .heart-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
 }
 
-/* CORAÇÃO SVG PULSANDO */
-.heart {
-    width: 200px;
-    height: 180px;
-    animation: pulse 1.5s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px #ff1744);
+.cartoon-heart {
+    position: relative;
+    animation: heartAppear 2s ease-out forwards, heartbeat 2s ease-in-out 2.5s infinite;
 }
 
-.love-text {
-    color: #ff1744;
-    font-size: 4rem;
-    font-weight: 900;
+.heart-glow {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: radial-gradient(circle, rgba(255,105,180,0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: glowPulse 3s ease-in-out infinite;
+    filter: blur(15px);
+}
+
+.heart-svg {
+    width: 160px;
+    height: 150px;
+    animation: bounceIn 2s ease-out forwards;
+}
+
+/* CORAÇÃO CARTOON PERFEITO */
+.heart-path {
+    fill: #ff69b4;
+    stroke: #ff1493;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 8px 15px rgba(255,105,180,0.5));
+}
+
+/* TEXTO DENTRO DO CORAÇÃO */
+.love-inside {
+    font-size: 14px;
+    font-weight: bold;
+    fill: #fff;
     text-shadow: 
-        0 0 10px #ff1744,
-        0 0 20px #ff1744,
-        0 0 30px #ff1744;
-    animation: glow 2s ease-in-out infinite alternate;
-    letter-spacing: 4px;
-    margin: 0;
-    text-align: center;
+        1px 1px 2px #ff1493,
+        -1px -1px 2px #ff1493;
+    font-family: 'Comic Sans MS', cursive;
+    letter-spacing: 0.5px;
+    animation: textGlow 2s ease-in-out 2.2s infinite alternate;
 }
 
 /* ANIMAÇÕES */
-@keyframes pulse {
-    0%, 100% { 
-        transform: scale(1); 
+@keyframes heartAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
     }
-    50% { 
-        transform: scale(1.15); 
+    50% {
+        opacity: 0.7;
+        transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
     }
 }
 
-@keyframes glow {
-    0% {
-        text-shadow: 
-            0 0 10px #ff1744,
-            0 0 20px #ff1744,
-            0 0 30px #ff1744;
-    }
-    100% {
-        text-shadow: 
-            0 0 20px #ff1744,
-            0 0 30px #ff1744,
-            0 0 40px #ff1744,
-            0 0 50px #ff1744;
-    }
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    70% { transform: scale(1); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
+@keyframes textGlow {
+    0% { text-shadow: 1px 1px 2px #ff1493, -1px -1px 2px #ff1493; }
+    100% { text-shadow: 0 0 10px #fff, 1px 1px 2px #ff1493, -1px -1px 2px #ff1493; }
 }
 
 /* RESPONSIVO */
 @media (max-width: 768px) {
-    .heart {
-        width: 150px;
-        height: 135px;
+    .heart-svg {
+        width: 130px;
+        height: 120px;
     }
-    .love-text {
-        font-size: 2.8rem;
-        letter-spacing: 2px;
+    .love-inside {
+        font-size: 12px;
     }
 }
