@@ -9,9 +9,10 @@ body {
     height: 100vh;
     overflow: hidden;
     font-family: 'Comic Sans MS', cursive;
+    position: relative;
 }
 
-/* ESTRELAS PISCANDO */
+/* ESTRELAS */
 .stars, .stars2 {
     position: fixed;
     top: 0;
@@ -19,173 +20,340 @@ body {
     width: 100%;
     height: 100%;
     background-image: 
-        radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
-        radial-gradient(1.5px 1.5px at 40px 70px, #ffd700, transparent),
-        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
-        radial-gradient(1px 1px at 130px 80px, #ff69b4, transparent),
-        radial-gradient(1.5px 1.5px at 160px 30px, #fff, transparent);
+        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+        radial-gradient(2px 2px at 40px 70px, #ffd700, transparent),
+        radial-gradient(1.5px 1.5px at 90px 40px, #ff69b4, transparent);
     pointer-events: none;
     z-index: 1;
-    animation: starsTwinkle 4s ease-in-out infinite;
+    animation: starsTwinkle 3s ease-in-out infinite;
 }
 
 .stars2 {
-    background-image: 
-        radial-gradient(1.5px 1.5px at 200px 120px, #fff, transparent),
-        radial-gradient(1px 1px at 250px 160px, #ffd700, transparent),
-        radial-gradient(1.5px 1.5px at 300px 90px, #ff69b4, transparent),
-        radial-gradient(1px 1px at 350px 140px, #fff, transparent),
-        radial-gradient(1.5px 1.5px at 380px 110px, #ffd700, transparent);
-    animation-delay: -2s;
+    animation-delay: -1.5s;
 }
 
 @keyframes starsTwinkle {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
 }
 
+/* TELA PRINCIPAL */
 .container {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
+    gap: 30px;
     z-index: 10;
+    position: relative;
 }
 
-/* CORAÇÃO CARTOON ROSA PERFEITO */
+/* CORAÇÃO MAIOR */
 .heart-wrapper {
-    animation: fadeInUp 2s ease-out;
+    animation: heartAppear 2s ease-out;
 }
 
 .heart {
     position: relative;
-    width: 140px;
-    height: 120px;
-    animation: heartbeat 1.8s ease-in-out infinite 2s, bounceHeart 2.5s ease-out 2s;
+    width: 200px;
+    height: 170px;
+    animation: heartbeat 2s ease-in-out infinite 2s;
     cursor: pointer;
     transform-origin: center;
 }
 
 .heart-top {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     background: #ff69b4;
     border-radius: 100px 100px 0 0;
     position: absolute;
     top: 0;
-    left: 35px;
+    left: 50px;
     transform: rotate(-45deg);
-    box-shadow: 
-        inset 0 -10px 20px rgba(255,182,193,0.5),
-        0 8px 20px rgba(255,105,180,0.6);
+    box-shadow: 0 10px 25px rgba(255,105,180,0.6);
 }
 
 .heart-top::after {
     content: '';
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     background: #ff1493;
     border-radius: 100px 100px 0 0;
     position: absolute;
-    top: 10px;
-    left: -10px;
+    top: 15px;
+    left: -15px;
     transform: rotate(45deg);
 }
 
 .heart-bottom {
-    width: 100px;
-    height: 80px;
+    width: 140px;
+    height: 110px;
     background: #ff69b4;
-    border-radius: 100px 100px 50px 50px;
+    border-radius: 140px 140px 70px 70px;
     position: absolute;
     bottom: 0;
-    left: 20px;
-    box-shadow: 
-        inset 0 -10px 20px rgba(255,182,193,0.5),
-        0 10px 25px rgba(255,105,180,0.7);
+    left: 30px;
+    box-shadow: 0 15px 30px rgba(255,105,180,0.7);
 }
 
-/* TEXTO DENTRO DO CORAÇÃO */
 .love-text-inside {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
-    font-size: 13px;
+    font-size: 18px;
     font-weight: bold;
-    text-shadow: 
-        1px 1px 3px #ff1493,
-        -1px -1px 3px #ff1493;
-    letter-spacing: 0.5px;
-    animation: textShine 2s ease-in-out infinite 2.2s;
-    z-index: 20;
+    text-shadow: 2px 2px 4px #ff1493;
+    letter-spacing: 1px;
+    animation: textGlow 2s ease-in-out infinite 2.2s;
 }
 
-/* EFEITO BRILHO */
-.heart::before {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    right: -15px;
-    bottom: -15px;
-    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    z-index: -1;
-    animation: glow 3s ease-in-out infinite;
-    filter: blur(10px);
+/* PERGUNTA */
+.question h2 {
+    color: #ff69b4;
+    font-size: 2.2rem;
+    text-align: center;
+    text-shadow: 0 0 20px #ff69b4;
+    animation: questionFloat 3s ease-in-out infinite;
+    margin-bottom: 20px;
 }
+
+/* BOTÕES */
+.buttons {
+    display: flex;
+    gap: 40px;
+}
+
+.btn {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-family: 'Comic Sans MS', cursive;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.btn-yes {
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: white;
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+.btn-no {
+    background: #666;
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+/* TELAS DOS GATINHOS */
+.cat-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.cat-screen h2 {
+    color: #ff69b4;
+    font-size: 2.5rem;
+    margin: 30px 0;
+    text-shadow: 0 0 20px #ff69b4;
+}
+
+/* GATINHO FELIZ */
+.happy-cat {
+    text-align: center;
+    animation: happyBounce 2s ease-out;
+}
+
+.cat-head {
+    position: relative;
+    width: 120px;
+    height: 100px;
+    margin: 0 auto 20px;
+}
+
+.cat-ears {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    width: 80px;
+}
+
+.ear {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 35px solid #ffdbac;
+    position: absolute;
+}
+
+.ear.left { left: 0; }
+.ear.right { right: 0; transform: scaleX(-1); }
+
+.cat-face {
+    width: 100px;
+    height: 80px;
+    background: #ffdbac;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.happy-eyes {
+    position: absolute;
+    top: 25px;
+    left: 15px;
+    right: 15px;
+}
+
+.eye {
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+}
+
+.eye.left { left: 0; }
+.eye.right { right: 0; }
+
+.smile {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 25px;
+    background: #333;
+    border-radius: 0 0 40px 40px;
+    border: 4px solid #ffdbac;
+}
+
+.flowers {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.btn-restart {
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.2rem;
+}
+
+/* GATINHO TRISTE */
+.sad-cat {
+    animation: sadFall 1.5s ease-out;
+}
+
+.sad-ears .ear {
+    border-bottom-color: #ccc;
+}
+
+.sad-eyes .eye {
+    width: 15px;
+    height: 30px;
+    border-radius: 15px 15px 5px 5px;
+    background: linear-gradient(to bottom, #333, #666);
+}
+
+.sad-mouth {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 20px;
+    border: 4px solid #333;
+    border-top: none;
+    border-radius: 0 0 30px 30px;
+}
+
+.tears {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    right: 20px;
+}
+
+.tear {
+    width: 12px;
+    height: 12px;
+    background: #4a9eff;
+    border-radius: 50% 50% 50% 0;
+    position: absolute;
+    animation: cry 2s ease-in-out infinite;
+}
+
+.tear.left { left: 10px; }
+.tear.right { right: 10px; animation-delay: 0.5s; }
 
 /* ANIMAÇÕES */
-@keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(50px); }
-    100% { opacity: 1; transform: translateY(0); }
+@keyframes heartAppear {
+    0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
 }
 
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
-    15% { transform: scale(1.12); }
-    30% { transform: scale(1); }
-    45% { transform: scale(1.12); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 2px 2px 4px #ff1493; }
+    50% { text-shadow: 0 0 20px #fff, 2px 2px 4px #ff1493; }
+}
+
+@keyframes questionFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+}
+
+@keyframes happyBounce {
+    0% { transform: scale(0) rotate(-20deg); }
+    50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
 
-@keyframes bounceHeart {
-    0% { transform: scale(0) rotate(-20deg); }
-    50% { transform: scale(1.15) rotate(5deg); }
-    100% { transform: scale(1) rotate(0deg); }
+@keyframes sadFall {
+    0% { transform: translateY(-50px) scale(1.1); }
+    100% { transform: translateY(20px) scale(0.9); }
 }
 
-@keyframes glow {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
+@keyframes cry {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(30px); opacity: 0; }
 }
 
-@keyframes textShine {
-    0% { 
-        text-shadow: 1px 1px 3px #ff1493, -1px -1px 3px #ff1493;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    100% { 
-        text-shadow: 0 0 15px #fff, 1px 1px 3px #ff1493, -1px -1px 3px #ff1493;
-        transform: translate(-50%, -50%) scale(1.05);
-    }
-}
-
-/* RESPONSIVO */
 @media (max-width: 768px) {
-    .heart {
-        width: 110px;
-        height: 95px;
-    }
-    .heart-top {
-        width: 55px;
-        height: 55px;
-        left: 27px;
-    }
-    .love-text-inside {
-        font-size: 11px;
-    }
+    .heart { width: 160px; height: 135px; }
+    .question h2 { font-size: 1.8rem; }
+    .buttons { gap: 20px; }
+    .btn { font-size: 1.3rem; padding: 12px 20px; }
 }
