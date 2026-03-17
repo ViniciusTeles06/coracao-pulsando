@@ -1,27 +1,68 @@
-document.addEventListener('click', function(e) {
-    for(let i = 0; i < 5; i++) {
-        setTimeout(() => createHeart(e.clientX, e.clientY), i * 80);
-    }
-});
+function showHappyCat() {
+    document.getElementById('mainScreen').style.display = 'none';
+    document.getElementById('happyCat').style.display = 'flex';
+    createHearts(20);
+}
 
-function createHeart(x, y) {
-    const hearts = ['💕','💖','💗','💓','💞','💝'];
-    const heart = document.createElement('span');
-    heart.textContent = hearts[Math.floor(Math.random()*hearts.length)];
-    heart.style.cssText = `
-        position: fixed; left: ${x}px; top: ${y}px;
-        font-size: ${25+Math.random()*15}px;
-        pointer-events: none; z-index: 1000;
-        animation: floatHearts 3s ease-out forwards;
-        color: #ff69b4; text-shadow: 0 0 12px #ff69b4;
-    `;
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(), 3000);
+function showSadCat() {
+    document.getElementById('mainScreen').style.display = 'none';
+    document.getElementById('sadCat').style.display = 'flex';
+    createTears(10);
+}
+
+function restart() {
+    document.getElementById('happyCat').style.display = 'none';
+    document.getElementById('sadCat').style.display = 'none';
+    document.getElementById('mainScreen').style.display = 'flex';
+}
+
+function createHearts(count) {
+    for(let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const hearts = ['💕','💖','💗','💓','💞'];
+            const heart = document.createElement('span');
+            heart.textContent = hearts[Math.floor(Math.random()*5)];
+            heart.style.cssText = `
+                position: fixed; left: ${Math.random()*100}vw; top: 100vh;
+                font-size: ${20+Math.random()*20}px; pointer-events: none;
+                z-index: 1000; animation: heartsRain 3s linear forwards;
+                color: #ff69b4; text-shadow: 0 0 10px #ff69b4;
+            `;
+            document.body.appendChild(heart);
+            setTimeout(()=>heart.remove(), 3000);
+        }, i * 100);
+    }
+}
+
+function createTears(count) {
+    for(let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const tear = document.createElement('span');
+            tear.textContent = '💧';
+            tear.style.cssText = `
+                position: fixed; left: ${Math.random()*100}vw; top: -10vh;
+                font-size: ${15+Math.random()*10}px; pointer-events: none;
+                z-index: 1000; animation: tearsFall 4s linear forwards;
+                color: #4a9eff; filter: drop-shadow(0 0 5px #4a9eff);
+            `;
+            document.body.appendChild(tear);
+            setTimeout(()=>tear.remove(), 4000);
+        }, i * 150);
+    }
 }
 
 const style = document.createElement('style');
-style.textContent = `@keyframes floatHearts {
-    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
-    100% { transform: translateY(-180px) rotate(720deg) scale(0); opacity: 0; }
-}`;
+style.textContent = `
+    @keyframes heartsRain {
+        to { top: -10vh; transform: rotate(360deg); }
+    }
+    @keyframes tearsFall {
+        to { top: 110vh; transform: rotate(-180deg); }
+    }
+`;
 document.head.appendChild(style);
+
+// Auto-hearts românticos
+setInterval(() => {
+    if(Math.random() < 0.1) createHearts(3);
+}, 3000);
