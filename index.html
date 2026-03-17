@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coração Pulsando - Eu Te Amo</title>
+    <title>Eu Te Amo 💕</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    
     <div class="container">
         <div class="heart-container">
-            <!-- CORAÇÃO EM SVG - 100% VISÍVEL -->
-            <svg class="heart" viewBox="0 0 100 90">
-                <path d="M50,20 C45,10 35,5 25,15 C15,25 15,40 25,50 L50,75 L75,50 C85,40 85,25 75,15 C65,5 55,10 50,20 Z" 
-                      fill="#ff1744" stroke="#ff1744" stroke-width="2"/>
-            </svg>
-            <h1 class="love-text">Eu te amo</h1>
+            <div class="cartoon-heart">
+                <div class="heart-glow"></div>
+                <svg class="heart-svg" viewBox="0 0 120 110">
+                    <path class="heart-path" d="M60,25 Q50,10 40,25 Q35,35 40,45 Q45,55 60,75 Q75,55 80,45 Q85,35 80,25 Q70,10 60,25 Z"/>
+                    <text class="love-inside" x="60" y="65" text-anchor="middle">Eu te amo</text>
+                </svg>
+            </div>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
