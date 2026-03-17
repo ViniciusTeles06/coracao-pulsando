@@ -7,94 +7,87 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- ESTRELAS -->
-    <div class="stars"></div>
-    <div class="stars2"></div>
+    <!-- ESTRELAS DE FUNDO -->
+    <div class="stars-bg"></div>
+    <div class="stars-bg stars-bg2"></div>
     
     <!-- TELA 1: CAIXINHA DE PRESENTE -->
     <div class="screen active" id="giftScreen">
         <div class="gift-container">
             <div class="gift-box" onclick="openGift()">
-                <div class="gift-top"></div>
+                <div class="gift-lid"></div>
                 <div class="gift-body">
                     <div class="ribbon"></div>
-                    <span class="gift-text">Clique aqui! 🎁</span>
+                    <div class="heart-inside">
+                        <div class="mini-heart">
+                            <div class="mini-heart-top"></div>
+                            <div class="mini-heart-bottom"></div>
+                        </div>
+                    </div>
+                    <span class="gift-text">Clique para abrir! 🎁</span>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- TELA 2: CORAÇÃO + PERGUNTA -->
+    <!-- TELA 2: CORAÇÃO PRINCIPAL + PERGUNTA -->
     <div class="screen" id="heartScreen">
-        <div class="heart-wrapper">
-            <div class="heart">
+        <div class="content-wrapper">
+            <div class="heart-large">
                 <div class="heart-top"></div>
                 <div class="heart-bottom"></div>
-                <span class="love-text-inside">Eu te amo</span>
+                <span class="love-text">Eu te amo ❤️</span>
             </div>
-        </div>
-        <div class="question">
-            <h2>Você me ama?</h2>
-        </div>
-        <div class="buttons">
-            <button class="btn btn-yes" onclick="goToHappyCat()">Sim 💕</button>
-            <button class="btn btn-no" onclick="goToSadCat()">Não 😿</button>
+            <div class="question-container">
+                <h2>Você me ama?</h2>
+            </div>
+            <div class="buttons-container">
+                <button class="btn btn-yes" onclick="showHappyCat()">Sim 💕</button>
+                <button class="btn btn-no" onclick="showSadCat()">Não 😿</button>
+            </div>
         </div>
     </div>
     
-    <!-- TELA GATINHO FELIZ -->
-    <div class="screen" id="happyCat">
-        <div class="cat-container">
-            <div class="happy-cat">
-                <div class="cat-head">
-                    <div class="cat-ears">
-                        <div class="ear left"></div>
-                        <div class="ear right"></div>
-                    </div>
-                    <div class="cat-face">
-                        <div class="eyes happy-eyes">
-                            <div class="eye left"></div>
-                            <div class="eye right"></div>
+    <!-- TELA 3: GATINHO FELIZ -->
+    <div class="screen" id="happyScreen">
+        <div class="cat-container happy-cat-container">
+            <div class="detailed-cat happy-cat">
+                <div class="cat-body">
+                    <div class="cat-head">
+                        <div class="cat-ears">
+                            <div class="ear ear-left"></div>
+                            <div class="ear ear-right"></div>
                         </div>
-                        <div class="smile"></div>
-                    </div>
-                </div>
-                <div class="flowers">
-                    <span>🌸</span><span>🌺</span><span>💐</span>
-                </div>
-            </div>
-            <h2>Eu sabia! 🥰</h2>
-            <button class="btn-restart" onclick="restartGame()">Jogar de novo 💖</button>
-        </div>
-    </div>
-    
-    <!-- TELA GATINHO TRISTE -->
-    <div class="screen" id="sadCat">
-        <div class="cat-container">
-            <div class="sad-cat">
-                <div class="cat-head">
-                    <div class="cat-ears sad-ears">
-                        <div class="ear left"></div>
-                        <div class="ear right"></div>
-                    </div>
-                    <div class="cat-face">
-                        <div class="eyes sad-eyes">
-                            <div class="eye left"></div>
-                            <div class="eye right"></div>
+                        <div class="cat-face">
+                            <div class="whiskers">
+                                <div class="whisker"></div>
+                                <div class="whisker short"></div>
+                                <div class="whisker"></div>
+                            </div>
+                            <div class="eyes-container happy-eyes">
+                                <div class="eye eye-left">
+                                    <div class="pupil"></div>
+                                </div>
+                                <div class="eye eye-right">
+                                    <div class="pupil"></div>
+                                </div>
+                            </div>
+                            <div class="nose"></div>
+                            <div class="mouth happy-mouth"></div>
                         </div>
-                        <div class="sad-mouth"></div>
+                    </div>
+                    <div class="cat-torso"></div>
+                    <div class="cat-paws">
+                        <div class="paw front-left"></div>
+                        <div class="paw front-right"></div>
                     </div>
                 </div>
-                <div class="tears">
-                    <div class="tear left"></div>
-                    <div class="tear right"></div>
-                </div>
             </div>
-            <h2>Não chora... 😿</h2>
-            <button class="btn-restart" onclick="restartGame()">Tentar de novo 💔</button>
+            <div class="flowers">🌸🌺💐🌷</div>
+            <h2 class="cat-message">Eu sabia! 🥰 Te amo!</h2>
+            <button class="btn-restart" onclick="restartGame()">Jogar novamente 💖</button>
         </div>
     </div>
     
-    <script src="script.js"></script>
-</body>
-</html>
+    <!-- TELA 4: GATINHO TRISTE -->
+    <div class="
