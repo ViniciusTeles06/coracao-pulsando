@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial Black', Arial, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.heart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+/* CORAÇÃO SVG PULSANDO */
+.heart {
+    width: 200px;
+    height: 180px;
+    animation: pulse 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px #ff1744);
+}
+
+.love-text {
+    color: #ff1744;
+    font-size: 4rem;
+    font-weight: 900;
+    text-shadow: 
+        0 0 10px #ff1744,
+        0 0 20px #ff1744,
+        0 0 30px #ff1744;
+    animation: glow 2s ease-in-out infinite alternate;
+    letter-spacing: 4px;
+    margin: 0;
+    text-align: center;
+}
+
+/* ANIMAÇÕES */
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(1); 
+    }
+    50% { 
+        transform: scale(1.15); 
+    }
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 
+            0 0 10px #ff1744,
+            0 0 20px #ff1744,
+            0 0 30px #ff1744;
+    }
+    100% {
+        text-shadow: 
+            0 0 20px #ff1744,
+            0 0 30px #ff1744,
+            0 0 40px #ff1744,
+            0 0 50px #ff1744;
+    }
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .heart {
+        width: 150px;
+        height: 135px;
+    }
+    .love-text {
+        font-size: 2.8rem;
+        letter-spacing: 2px;
+    }
+}
