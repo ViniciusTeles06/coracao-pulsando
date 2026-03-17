@@ -11,13 +11,74 @@
     <div class="stars"></div>
     <div class="stars2"></div>
     
-    <div class="container">
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="container" id="mainScreen">
         <div class="heart-wrapper">
             <div class="heart">
                 <div class="heart-top"></div>
                 <div class="heart-bottom"></div>
                 <span class="love-text-inside">Eu te amo</span>
             </div>
+        </div>
+        
+        <!-- PERGUNTA -->
+        <div class="question">
+            <h2>Você me ama?</h2>
+        </div>
+        
+        <!-- BOTÕES -->
+        <div class="buttons">
+            <button class="btn btn-yes" onclick="showHappyCat()">Sim 💕</button>
+            <button class="btn btn-no" onclick="showSadCat()">Não 😿</button>
+        </div>
+    </div>
+    
+    <!-- TELA GATINHO FELIZ -->
+    <div class="cat-screen" id="happyCat">
+        <div class="happy-cat">
+            <div class="cat-head">
+                <div class="cat-ears">
+                    <div class="ear left"></div>
+                    <div class="ear right"></div>
+                </div>
+                <div class="cat-face">
+                    <div class="eyes happy-eyes">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                    </div>
+                    <div class="smile"></div>
+                </div>
+            </div>
+            <div class="flowers">
+                <span>🌸</span><span>🌺</span><span>💐</span>
+            </div>
+            <h2>Eu sabia! 🥰</h2>
+            <button class="btn-restart" onclick="restart()">Jogar de novo 💖</button>
+        </div>
+    </div>
+    
+    <!-- TELA GATINHO TRISTE -->
+    <div class="cat-screen" id="sadCat">
+        <div class="sad-cat">
+            <div class="cat-head">
+                <div class="cat-ears sad-ears">
+                    <div class="ear left"></div>
+                    <div class="ear right"></div>
+                </div>
+                <div class="cat-face">
+                    <div class="eyes sad-eyes">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                    </div>
+                    <div class="sad-mouth"></div>
+                </div>
+            </div>
+            <div class="tears">
+                <div class="tear left"></div>
+                <div class="tear right"></div>
+            </div>
+            <h2>Não chora... 😿</h2>
+            <button class="btn-restart" onclick="restart()">Tentar de novo 💔</button>
         </div>
     </div>
     
